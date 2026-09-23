@@ -599,9 +599,7 @@ def test_overlaps_attr_multilinestring():
 
 
 def test_dwithin_attr_polygon():
-    result = parse(
-        """ { "op": "DWithin", "args": [ {"property": "geometry"}, { "type": "Polygon", "coordinates": [[[1, 1], [2, 2], [0, 3], [1, 1]]] }, 5, "feet" ] } """
-    )
+    result = parse("DWITHIN(geometry, POLYGON((1 1,2 2,0 3,1 1)), 5, feet)")
     assert result == ast.SpatialDistancePredicateNode(
         ast.Attribute("geometry"),
         ast.LiteralExpression(
